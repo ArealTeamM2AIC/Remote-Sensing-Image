@@ -1,9 +1,11 @@
 # Remote-Sensing-Image
 Remote sensing image scene classification
 
-[A sample dataset 10 class of objects](https://drive.google.com/file/d/1Mc3YPANV1yUojEJOfBBSFAV1bvnN0h3b/view?usp=sharing (GoogleDrive))
+[The splitted dataset](https://drive.google.com/file/d/1voR-UZHLPm36UBqzw5aDtW77y388or2H/view?usp=sharing (GoogleDrive))
 
-[The original dataset 45 class of objects](https://1drv.ms/u/s!AmgKYzARBl5ca3HNaHIlzp_IXjs (OneDrive))
+Train/Test/Validation 400/250/50
+
+[The original dataset](https://1drv.ms/u/s!AmgKYzARBl5ca3HNaHIlzp_IXjs (OneDrive))
 
 To run the Alex.ipynb, you need to have jupyter notebook installed.
 
