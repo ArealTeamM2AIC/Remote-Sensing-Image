@@ -44,9 +44,6 @@ dataset_sizes = {x: len(image_datasets[x]) for x in folders}
 class_names = image_datasets['train'].classes
 print(class_names)
 
-
-processed_data_file_name = "processed_data.data"
-label_file_name = "processed_data.solution"
 dico_file_name = "dico.p"
 
 from matplotlib.pyplot import imshow
@@ -55,9 +52,6 @@ from PIL import Image
 dico = {n:i for i, n in enumerate(class_names)}
 
 pickle.dump(dico, open(dico_file_name, "wb"), protocol=pickle.HIGHEST_PROTOCOL)
-
-ft_file = open(processed_data_file_name, "w")
-lbl_file = open(label_file_name, "w")
 
 model_conv.cuda()
 
@@ -80,12 +74,28 @@ for xb, yb in dataloaders["train"]:
         str_lbl += write_label(y)
 print("train fait")
 
+ft_file = open("processed_data_train.data", "w")
+lbl_file = open("processed_data_train.solution", "w")
+ft_file.write(str_data[:-1])
+lbl_file.write(str_lbl[:-1])
+
+str_data = ""
+str_lbl = ""
+
 for xb, yb in dataloaders["val"]:
     outs = model_conv(xb.cuda())
     for out, y in zip(outs.cpu(), yb):
         str_data += write_line(out)
         str_lbl += write_label(y)
 print("val fait")
+
+ft_file = open("processed_data_val.data", "w")
+lbl_file = open("processed_data_val.solution", "w")
+ft_file.write(str_data[:-1])
+lbl_file.write(str_lbl[:-1])
+
+str_data = ""
+str_lbl = ""
 
 for xb, yb in dataloaders["test"]:
     outs = model_conv(xb.cuda())
@@ -94,5 +104,7 @@ for xb, yb in dataloaders["test"]:
         str_lbl += write_label(y)
 print("test fait")
 
+ft_file = open("processed_data_test.data", "w")
+lbl_file = open("processed_data_test.solution", "w")
 ft_file.write(str_data[:-1])
 lbl_file.write(str_lbl[:-1])
