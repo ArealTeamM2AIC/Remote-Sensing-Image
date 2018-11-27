@@ -11,7 +11,7 @@ from PIL import Image
 from matplotlib import cm
 from sklearn.tree import DecisionTreeClassifier
 
-class AlexNetModelBis(BaseEstimator):
+class AlexNetModel(BaseEstimator):
     def __init__(self, learning_rate=1e-3, nb_epoch=10, verbose=False, batch_size=32, n_class=13, use_cuda=False):
         super(AlexNetModel, self).__init__()
         self.nb_epoch = nb_epoch
@@ -154,7 +154,6 @@ class BaselineModel(BaseEstimator):
         Using DecisionTreeClassifier from sklearn as Baseline Model
         """
         super(DecisionTreeClassifier, self).__init__()
-        self.classifier = DecisionTreeClassifier()
         self.num_train_samples=0
         self.num_feat=1
         self.num_labels=1
@@ -170,7 +169,7 @@ class BaselineModel(BaseEstimator):
         if (self.num_train_samples != num_train_samples):
             print("ARRGH: number of samples in X and y do not match!")
         self.is_trained=True
-        self.classifier.fit(X, y)
+        self.fit(X, y)
 
     def predict(self, X):
         num_test_samples = X.shape[0]
@@ -180,7 +179,7 @@ class BaselineModel(BaseEstimator):
             print("ARRGH: number of features in X does not match training data!")
         print("PREDICT: dim(y)= [{:d}, {:d}]".format(num_test_samples, self.num_labels))
         y = np.zeros([num_test_samples, self.num_labels])
-        return self.classifier.predict(X)
+        return self.predict(X)
 
     def save(self, path="./"):
         pickle.dump(self, open(path + '_model.pickle', "wb"))
