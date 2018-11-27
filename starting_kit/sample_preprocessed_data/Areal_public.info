@@ -1,7 +1,7 @@
 usage = 'Sample dataset Areal preprocessed data'
 name = 'areal'
 task = 'multiclass.classification'
-target_type = ''
+target_type = 'Categorical'
 feat_type = 'Numerical'
 metric = 'accuracy'
 time_budget =  12000
