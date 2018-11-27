@@ -61,32 +61,38 @@ lbl_file = open(label_file_name, "w")
 
 model_conv.cuda()
 
-def write_line(file, tensor_1d):
+def write_line(tensor_1d):
     line = str(tensor_1d[0].item())
-    for f in tensor_1d[1:-1]:
+    for f in tensor_1d[1:]:
         line += " " + str(f.item())
-    file.write(line + "\n")
+    return line + "\n"
 
-def write_label(file, l):
-    file.write(str(l.item()) + "\n")
+def write_label(l):
+    return  str(l.item()) + "\n"
+
+str_data = ""
+str_lbl = ""
 
 for xb, yb in dataloaders["train"]:
     outs = model_conv(xb.cuda())
     for out, y in zip(outs.cpu(), yb):
-        write_line(ft_file, out)
-        write_label(lbl_file, y)
+        str_data += write_line(out)
+        str_lbl += write_label(y)
 print("train fait")
 
 for xb, yb in dataloaders["val"]:
     outs = model_conv(xb.cuda())
     for out, y in zip(outs.cpu(), yb):
-        write_line(ft_file, out)
-        write_label(lbl_file, y)
+        str_data += write_line(out)
+        str_lbl += write_label(y)
 print("val fait")
 
 for xb, yb in dataloaders["test"]:
     outs = model_conv(xb.cuda())
     for out, y in zip(outs.cpu(), yb):
-        write_line(ft_file, out)
-        write_label(lbl_file, y)
+        str_data += write_line(out)
+        str_lbl += write_label(y)
 print("test fait")
+
+ft_file.write(str_data[:-1])
+lbl_file.write(str_lbl[:-1])
