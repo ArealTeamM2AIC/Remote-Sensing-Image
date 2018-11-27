@@ -62,8 +62,8 @@ lbl_file = open(label_file_name, "w")
 model_conv.cuda()
 
 def write_line(file, tensor_1d):
-    line = ""
-    for f in tensor_1d:
+    line = str(tensor_1d[0].item())
+    for f in tensor_1d[1:-1]:
         line += " " + str(f.item())
     file.write(line + "\n")
 
