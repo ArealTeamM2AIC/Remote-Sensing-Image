@@ -3,6 +3,8 @@ import torch.nn as nn
 import torch.optim as optim
 import torchvision
 import numpy as np
+import pickle
+import dill
 from torchvision import transforms
 from sklearn.base import BaseEstimator
 from PIL import Image
