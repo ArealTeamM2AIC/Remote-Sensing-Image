@@ -170,12 +170,12 @@ class AlexNetModel(BaseEstimator):
             print("Model reloaded from: " + modelfile)
         return self
 
-class BaselineModel():
+class BaselineModel(BaseEstimator):
     def __init__(self):
         """
         Using DecisionTreeClassifier from sklearn as Baseline Model
         """
-        # super(DecisionTreeClassifier, self).__init__()
+        super(BaselineModel, self).__init__()
         self.classifier = DecisionTreeClassifier()
         self.num_train_samples=0
         self.num_feat=1
