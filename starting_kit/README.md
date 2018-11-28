@@ -35,4 +35,4 @@ then zip the contents of sample_result_submission (without the directory).
 ### Info
 For data submission with non-processed data, un-comment the line 140 of `ingestion.py` and comment the line 141. Do the inverse for pre-processed data.
 
-Make sur that the pickled model is the right one (between AlexNetModel and BaselineModel)
+Make sur that the pickled model is the right one (between `AlexNetModel` and `BaselineModel`)
