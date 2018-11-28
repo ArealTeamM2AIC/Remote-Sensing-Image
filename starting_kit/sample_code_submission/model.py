@@ -4,13 +4,16 @@ import torch.optim as optim
 import torchvision
 import numpy as np
 import pickle
-import dill
 from torchvision import transforms
 from sklearn.base import BaseEstimator
 from PIL import Image
 from matplotlib import cm
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.naive_bayes import GaussianNB
+from os.path import isfile
+
+def requires_grad(p):
+    return p.requires_grad
 
 
 class AlexNetModel(BaseEstimator):
@@ -33,7 +36,7 @@ class AlexNetModel(BaseEstimator):
         self.criterion = nn.CrossEntropyLoss()
         
         # Optimizer
-        self.optim = optim.SGD(list(filter(lambda p: p.requires_grad, self.model_conv.parameters())), lr=learning_rate, momentum=0.9)
+        self.optim = optim.SGD(list(filter(requires_grad, self.model_conv.parameters())), lr=learning_rate, momentum=0.9)
         
         self.use_cuda = use_cuda
         
@@ -56,8 +59,7 @@ class AlexNetModel(BaseEstimator):
             transforms.RandomVerticalFlip(),
             transforms.RandomRotation(degrees=90),
             transforms.ToTensor(),
-            transforms.Normalize(mean, std),
-            transforms.Lambda(lambda t: t.cuda() if self.use_cuda else t)])
+            transforms.Normalize(mean, std)])
 
     def fit(self, X, y):
         '''
@@ -72,6 +74,10 @@ class AlexNetModel(BaseEstimator):
         nb_batch = int(n_sample / self.batch_size)
         
         y = self.process_label(y)
+        
+        if self.use_cuda:
+            X = X.cuda()
+            y = y.cuda()
         
         self.model_conv.train()
         for e in range(self.nb_epoch):
@@ -96,8 +102,6 @@ class AlexNetModel(BaseEstimator):
         n_sample = X.shape[0]
         X = X.reshape(n_sample, 3, 256, 256)
         res = torch.zeros(1,3,224,224)
-        if self.use_cuda:
-            res = res.cuda()
         for i in range(n_sample):
             x = np.moveaxis(X[i], 0, -1)
             img = Image.fromarray((x*255).astype('uint8'))
@@ -108,15 +112,11 @@ class AlexNetModel(BaseEstimator):
     def process_label(self, y):
         self.label_dico = {}
         res = torch.zeros(1)
-        if self.use_cuda:
-            res = res.cuda()
         for i in range(y.shape[0]):
             l = y[i,0]
             if l not in self.label_dico:
                 self.label_dico[l] = len(self.label_dico)
             l = torch.Tensor([self.label_dico[l]])
-            if self.use_cuda:
-                l = l.cuda()
             res = torch.cat((res, l))
         return res[1:].type(torch.long) 
         
@@ -133,6 +133,10 @@ class AlexNetModel(BaseEstimator):
         inverted_dico = {v:k for k,v in self.label_dico.items()}
         self.model_conv.eval()
         X = self.process_data(X)
+        
+        if self.use_cuda:
+            X = X.cuda()
+            
         pred = self.model_conv(X).argmax(dim=1).detach().cpu()
         res = []
         for i in range(pred.size(0)):
