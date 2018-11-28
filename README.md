@@ -17,3 +17,6 @@ Other requirements:
   
   tqdm >=2.2.4
 
+Link to google drive for preprocessed data :
+
+https://drive.google.com/open?id=1Xkhm2pubw6nJDZHwz4NjApFaeMH5cvhs
