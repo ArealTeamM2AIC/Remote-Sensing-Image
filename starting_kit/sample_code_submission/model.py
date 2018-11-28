@@ -17,8 +17,21 @@ def requires_grad(p):
 
 
 class AlexNetModel(BaseEstimator):
-    def __init__(self, learning_rate=1e-3, nb_epoch=10, verbose=False, batch_size=32, n_class=13, use_cuda=False):
+    def __init__(self, learning_rate=1e-3, nb_epoch = 10, batch_size = 32, verbose=False, use_cuda=False):
         super(AlexNetModel, self).__init__()
+        
+        if learning_rate is None:
+            learning_rate = 1e-3
+        if nb_epoch is None:
+            nb_epoch = 10
+        if batch_size is None:
+            batch_size = 32
+        if verbose is None:
+            verbose = False
+        if use_cuda is None:
+            use_cuda = False        
+        
+        self.verbose = verbose
         self.nb_epoch = nb_epoch
         self.batch_size = batch_size
         
@@ -28,7 +41,7 @@ class AlexNetModel(BaseEstimator):
         # convert all the layers to list and remove the last one
         features = list(self.model_conv.classifier.children())[:-1]
         ## Add the last layer based on the num of classes in our dataset
-        features.extend([nn.Linear(num_ftrs, n_class)])
+        features.extend([nn.Linear(num_ftrs, 13)])
         ## convert it into container and add it to our model class.
         self.model_conv.classifier = nn.Sequential(*features)
         
@@ -75,10 +88,6 @@ class AlexNetModel(BaseEstimator):
         
         y = self.process_label(y)
         
-        if self.use_cuda:
-            X = X.cuda()
-            y = y.cuda()
-        
         self.model_conv.train()
         for e in range(self.nb_epoch):
             sum_loss = 0
@@ -88,14 +97,21 @@ class AlexNetModel(BaseEstimator):
                 start = i * self.batch_size
                 end = max((i + 1) * self.batch_size, n_sample)
              
-                out = self.model_conv(X[start:end])
-                loss = self.criterion(out, y[start:end])
+                batch = X[start:end]
+                batch_lbl = y[start:end]
+                if self.use_cuda:
+                    batch = batch.cuda()
+                    batch_lbl = batch_lbl.cuda()
+                
+                out = self.model_conv(batch)
+                loss = self.criterion(out, batch_lbl)
                 
                 loss.backward()
                 self.optim.step()
                 
                 sum_loss += loss.item()
-            print("Epoch %d : loss = %f" % (e, sum_loss / nb_batch))
+            if self.verbose:
+                print("Epoch %d : loss = %f" % (e, sum_loss / nb_batch))
             
         
     def process_data(self, X):
