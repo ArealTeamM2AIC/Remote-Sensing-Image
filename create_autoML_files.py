@@ -3,14 +3,20 @@ import numpy as np
 from PIL import Image
 from os.path import join
 from os import makedirs
-import matplotlib.pyplot as plt
 
-train = load_data.load_images_in_path5("RESISC13/train/", 65)#1950)
-valid = load_data.load_images_in_path5("RESISC13/val/", 13)#1950)
-test = load_data.load_images_in_path5("RESISC13/test/", 0)#5200)
+# Sample
+# train = load_data.load_images_in_path5("RESISC13/train/", 65)
+# valid = load_data.load_images_in_path5("RESISC13/val/", 13)
+# test = load_data.load_images_in_path5("RESISC13/test/", 0)
 
-res_directory = "starting_kit/sample_data/"
-# res_directory = "fulldata_autoML/"
+# res_directory = "starting_kit/sample_data/"
+
+# Full data
+train = load_data.load_images_in_path5("RESISC13/train/", 5200)
+valid = load_data.load_images_in_path5("RESISC13/val/", 1950)
+test = load_data.load_images_in_path5("RESISC13/test/", 1950)
+
+res_directory = "starting_kit/fulldata_autoML/"
 
 def get_classes(dataset):
     res = dict()
@@ -21,13 +27,19 @@ def get_classes(dataset):
         res[lab] = i
     return res
 
+def dict_toshuffledlist(d):
+    l = list(d.values())
+    np.random.shuffle(l)
+    return l
+
 classes = get_classes(train)
 # print(classes)
-# print(valid.values())
-# print(valid.values())
+train = dict_toshuffledlist(train)
+valid = dict_toshuffledlist(valid)
+test = dict_toshuffledlist(test)
 
 file = open(res_directory + "Areal_train.data","w")
-for path_img, _ in train.values():
+for path_img, _ in train:
     str_train = ""
     img = Image.open(path_img)
     arr = np.array(img).reshape(-1)
@@ -40,16 +52,12 @@ file.close()
 
 file = open(res_directory + "Areal_train.solution","w")
 ind = 0
-for img, lab in train.values():
+for _, lab in train:
     file.write(str(classes[lab])+"\n")
-    # if ind < 1:
-    #     Image.open(img).show()
-    #     print(lab, classes[lab])
-    #     ind += 1
 file.close()
 
 file = open(res_directory + "Areal_valid.data","w")
-for path_img, _ in valid.values():
+for path_img, _ in valid:
     str_train = ""
     img = Image.open(path_img)
     arr = np.asarray(img).reshape(-1)
@@ -61,12 +69,12 @@ for path_img, _ in valid.values():
 file.close()
 
 file = open(res_directory + "Areal_valid.solution","w")
-for _, lab in valid.values():
+for _, lab in valid:
     file.write(str(classes[lab])+"\n")
 file.close()
 
 file = open(res_directory + "Areal_test.data","w")
-for path_img, _ in test.values():
+for path_img, _ in test:
     str_train = ""
     img = Image.open(path_img)
     arr = np.asarray(img).reshape(-1)
@@ -78,7 +86,7 @@ for path_img, _ in test.values():
 file.close()
 
 file = open(res_directory + "Areal_test.solution","w")
-for _, lab in test.values(): 
+for _, lab in test: 
     file.write(str(classes[lab])+"\n")
 file.close()
 
