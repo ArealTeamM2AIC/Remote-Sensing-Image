@@ -6,10 +6,6 @@ import numpy as np
 import pickle
 from torchvision import transforms
 from sklearn.base import BaseEstimator
-from PIL import Image
-from matplotlib import cm
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.naive_bayes import GaussianNB
 from os.path import isfile
 
 def requires_grad(p):
