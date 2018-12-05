@@ -1,22 +1,21 @@
-# Remote-Sensing-Image
-Remote sensing image scene classification
+# Image recognition
 
-[The splitted dataset](https://drive.google.com/file/d/1zUjukWFUxHuTAluQHJEjMGslJjtT0e11/view?usp=sharing (GoogleDrive))
+Multi class classification for image recognition
 
-Train/Test/Validation 150/400/150
+We used a data set originally presented in :
 
-[The original dataset](https://1drv.ms/u/s!AmgKYzARBl5ca3HNaHIlzp_IXjs (OneDrive))
+https://arxiv.org/pdf/1703.00121.pdf?fbclid=IwAR16qo-EX_Z05ZpxvWG8F-oBU0SlnY-3BPCWBVVOGPyJcVy7BBqCKjnsvJo
 
-[The paper of dataset](https://arxiv.org/pdf/1703.00121.pdf (Arxiv))
+We kept only part of it, the 13 classes that can be assimilated to landscape/nature and not human construction.
 
-To run the Alex.ipynb, you need to have jupyter notebook installed.
+In this repository are two different starting kits, corresponding to :
 
-Other requirements:
+    Starting kit for working on images
+    
+    Starting kit for working on pre-processed images
+    
+For the starting kit on images, you will need to install pytorch and torchvision, which are provided with requirements.txt files.
 
-  pytorch >= 0.4.0
-  
-  tqdm >=2.2.4
+You just have to :
 
-Link to google drive for preprocessed data :
-
-https://drive.google.com/open?id=1Xkhm2pubw6nJDZHwz4NjApFaeMH5cvhs
+    pip install -r requirements.txt
