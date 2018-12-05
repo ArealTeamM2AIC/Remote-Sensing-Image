@@ -1,5 +1,5 @@
 This is a starting kit for the Remote Sensing Image Scene Classification. 
-We use the NWPU-RESISC45 satelite dataset from [link](https://project.inria.fr/aerialimagelabeling/). The data set contains 31500 of satelite images of 45 class, each having 700 images.
+We use the NWPU-RESISC45 satelite dataset from [link](https://onedrive.live.com/?authkey=%21AHHNaHIlzp_IXjs&cid=5C5E061130630A68&id=5C5E061130630A68%21107&parId=5C5E061130630A68%21112&action=locate). The data set contains 31500 of satelite images of 45 class, each having 700 images.
 
 References and credits: 
 
