@@ -97,7 +97,7 @@ class Bundle:
 			data_dir = self.big_data
 		else:
 			data_dir = self.sample_data
-		command_ingestion = 'python {} {} {} {} {}'.format(path_ingestion, data_dir, self.sample_result_submission, self.ingestion_program, self.sample_code_submission)
+		command_ingestion = 'python3 {} {} {} {} {}'.format(path_ingestion, data_dir, self.sample_result_submission, self.ingestion_program, self.sample_code_submission)
 		os.system(command_ingestion)
 		# Check that predictions were made:
 		results = ls(os.path.join(starting_kit_dir, '*/*.predict'))
@@ -112,7 +112,7 @@ class Bundle:
 		print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
 		# Run the scoring program
 		path_scoring = os.path.join(self.scoring_program, 'score.py')
-		command_scoring = 'python {} {} {} {}'.format(path_scoring, data_dir, self.sample_result_submission, self.scoring_output)
+		command_scoring = 'python3 {} {} {} {}'.format(path_scoring, data_dir, self.sample_result_submission, self.scoring_output)
 		os.system(command_scoring)
 		# Check that scores were computed:
 		scores = ls(os.path.join(starting_kit_dir, '*/scores.*'))

@@ -4,8 +4,8 @@
 
 # Isabelle Guyon -- November 19, 2018
 
-title: Sample competition
-description: Sample competition M2AIC 2018-2019
+title: Image recognition
+description: Image recognition for landscape/nature images
 image: logo.jpg
 has_registration: False                 # We do not check participants, registration is free
 force_submission_to_leaderboard: True   # If false, participants must submit manually, do not change
@@ -13,7 +13,7 @@ disallow_leaderboard_modifying: True    # If true, submissions cannot be changed
 enable_detailed_results: True           # True if html file written
 enable_forum: True                      # Forum active
 admin_names: guyon,tthomas63,eric,pavao # Admin people that can help you will have access to your competition
-competition_docker_image: codalab/codalab-legacy:py3
+competition_docker_image: areal/codalab:pytorch_env
 end_date: null                          # Never ends
 
 html:

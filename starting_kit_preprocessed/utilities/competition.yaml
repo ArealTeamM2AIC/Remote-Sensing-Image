@@ -4,8 +4,8 @@
 
 # Isabelle Guyon -- November 19, 2018
 
-title: Sample competition
-description: Sample competition M2AIC 2018-2019
+title: Preprocessed image recognition
+description: Image recognition for landscape/nature images that were preprocessed (easier that normal images)
 image: logo.jpg
 has_registration: False                 # We do not check participants, registration is free
 force_submission_to_leaderboard: True   # If false, participants must submit manually, do not change

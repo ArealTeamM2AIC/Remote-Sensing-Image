@@ -55,7 +55,7 @@ def read_as_df(basename, type="train"):
     print('Reading '+ basename + '_' + type+ ' from AutoML format')
     feat_name = pd.read_csv(basename + '_feat.name', header=None)
     label_name = pd.read_csv(basename + '_label.name', header=None, names =['Class'])
-    X = pd.read_csv(basename + '_' + type + '.data', sep=' ', names = np.ravel(feat_name))
+    X = pd.read_csv(basename + '_' + type + '.data', sep=' ', names = np.ravel(feat_name), dtype=int)
     [patnum, featnum] = X.shape
     print('Number of examples = %d' % patnum)
     print('Number of features = %d' % featnum)
@@ -206,7 +206,7 @@ def check_dataset(dirname, name):
 def data(filename, nbr_features=None, verbose = False):
     ''' The 2nd parameter makes possible a using of the 3 functions of data reading (data, data_sparse, data_binary_sparse) without changing parameters'''
     if verbose: print (np.array(data_converter.file_to_array(filename)))
-    return np.array(data_converter.file_to_array(filename), dtype=float)
+    return np.array(data_converter.file_to_array(filename), dtype=int)
 
 def data_mv(filename, nbr_features=None, verbose = False):
     ''' The 2nd parameter makes possible a using of the 3 functions of data reading (data, data_sparse, data_binary_sparse) without changing parameters'''
