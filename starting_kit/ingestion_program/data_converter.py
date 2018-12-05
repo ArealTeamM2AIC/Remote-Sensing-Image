@@ -23,16 +23,22 @@ def file_to_array (filename, verbose=False):
     try:
         with open(filename, "r") as data_file:
             if verbose: print ("Reading {}...".format(filename))
+            """
             lines = data_file.readlines()
             #print lines
             if verbose: print ("Converting {} to correct array...".format(filename))
             data = [l.strip().split() for l in lines]
+            """
+            data = []
+            for l in data_file:
+                data.append(list(map(lambda x: int(x), l.split())))
             data_file.close()
     except:
         data =[]
     return data
 
 def file_to_array_mv (filename, verbose=False):
+    exit(0)
     ''' Converts a file to a list of list of STRING
     It differs from np.genfromtxt in that the number of columns doesn't need to be constant'''
     data =[]
@@ -60,6 +66,7 @@ def file_to_array_mv (filename, verbose=False):
 
 
 def file_to_libsvm (filename, data_binary  , n_features):
+    exit(0)
     ''' Converts a file to svmlib format and return csr matrix
     filname = path of file
     data_binary = True if is sparse binary data False else

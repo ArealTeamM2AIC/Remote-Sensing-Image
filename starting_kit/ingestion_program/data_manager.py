@@ -71,7 +71,7 @@ class DataManager:
 				self.tmp_dir = "tmp"
 		info_file = os.path.join (self.input_dir, basename + '_public.info')
 		self.info = {}
-		self.getInfo (info_file)
+		#self.getInfo (info_file)
 		self.feat_type = self.loadType (os.path.join(self.input_dir, basename + '_feat.type'), verbose=verbose)
 		self.data = {}
   		#if True: return
@@ -258,8 +258,11 @@ class DataManager:
 		return self.info
 
 	def getFormatData(self,filename):
+		self.info['format'] = 'dense'
+		self.info['is_sparse'] = 0
+		return 'dense'
 		''' Get the data format directly from the data file (in case we do not have an info file)'''
-		if 'format' in self.info.keys():
+		"""if 'format' in self.info.keys():
 			return self.info['format']
 		if 'is_sparse' in self.info.keys():
 			if self.info['is_sparse'] == 0:
@@ -283,7 +286,7 @@ class DataManager:
 				if 'format' not in self.info.keys():
 					self.info['format'] = 'dense'
 					self.info['is_sparse'] = 0
-		return self.info['format']
+		return self.info['format']"""
 
 	def getNbrFeatures (self, *filenames):
 		''' Get the number of features directly from the data file (in case we do not have an info file)'''
