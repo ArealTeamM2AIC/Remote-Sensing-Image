@@ -2,12 +2,12 @@
 <h1>Evaluation</h1>
 
 <p>
-The problem is a multicalss classification problem. Each sample (an image) is characterized by its 256*256 pixels. You must predict the categories of 45 classes.
+The problem is a multicalss classification problem. Each sample (an image) is characterized by its 128*128 pixels. You must predict the categories of 13 classes.
 
 <br>
-You are given for training a data matrix X_train of dimension num_training_samples x num_features 
-and an array y_train of labels of dimension num_training_samples. You must train a model
-which predicts the labels for two test matrices X_valid and X_test. 
+You are given for training a data matrix X_train of dimension 5200 samples x 49152 (128 * 128 * 3) features
+and an array y_train of labels of dimension 5200 samples. You must train a model
+which predicts the labels for two test matrices X_valid and X_test, each having 1950 samples. 
 
 <br>
 There are 2 phases:
@@ -26,6 +26,6 @@ This sample competition allows you to submit either:
 <li> A prediction model that must be trained and tested. 
 </ul>
 
-The submissions are evaluated using the <b>accuracy</b> and <b>log loss</b> metric.
+The submissions are evaluated using the <b>accuracy</b> metric.
 </p>
 
