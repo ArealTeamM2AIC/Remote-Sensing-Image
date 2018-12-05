@@ -2,7 +2,8 @@
 <h1>Evaluation</h1>
 
 <p>
-The problem is a binary classification problem. Each sample (an image) is characterized by its 1000*1000 pixels. You must predict the categories: building or non-building.
+The problem is a multicalss classification problem. Each sample (an image) is characterized by its 256*256 pixels. You must predict the categories of 45 classes.
+
 <br>
 You are given for training a data matrix X_train of dimension num_training_samples x num_features 
 and an array y_train of labels of dimension num_training_samples. You must train a model
@@ -25,6 +26,6 @@ This sample competition allows you to submit either:
 <li> A prediction model that must be trained and tested. 
 </ul>
 
-The submissions are evaluated using the <b>accuracy</b> and <b>IoU</b> metric.
+The submissions are evaluated using the <b>accuracy</b> and <b>log loss</b> metric.
 </p>
 
