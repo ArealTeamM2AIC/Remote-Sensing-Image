@@ -137,7 +137,7 @@ if __name__=="__main__" and debug_mode<4:
     import data_io                       # general purpose input/output functions
     from data_io import vprint           # print only in verbose mode
     from data_manager import DataManager # load/save data and get info about them
-    from model import model    			 # example model, in scikit-learn style
+    from model import BasicCNN as model    			 # example model, in scikit-learn style
 
     if debug_mode >= 4: # Show library version and directory structure
         data_io.show_dir(".")

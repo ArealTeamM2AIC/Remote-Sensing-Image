@@ -21,18 +21,18 @@ class SimpleConvModel(nn.Module):
         self.linear_hidden_size = linear_hidden_size
         self.out_class = out_class
 
-        self.seq1 = nn.Sequential(nn.Conv2d(3, self.out_channel_conv, (10,10), stride=(3,3)),
+        self.seq1 = nn.Sequential(nn.Conv2d(3, self.out_channel_conv, (5,5), stride=(3,3)),
                                   nn.MaxPool2d((5,5)),
                                   nn.ReLU())
 
-        self.seq2 = nn.Sequential(nn.Linear(16 * 16 * 16, self.out_class),#self.linear_hidden_size),
+        self.seq2 = nn.Sequential(nn.Linear(16 * 8 * 8, self.out_class),#self.linear_hidden_size),
                                   #nn.ReLU(),
                                   #nn.Linear(self.linear_hidden_size, self.out_class),
                                   nn.Softmax(dim = 1)) 
 
     def forward(self, x):
         out1 = self.seq1(x)
-        out2 = out1.view(-1, 16*16*16)
+        out2 = out1.view(-1, 16*8*8)
         out3 = self.seq2(out2)
         return out3
 
@@ -101,14 +101,9 @@ class BasicCNN(BaseEstimator):
 
     def process_data(self, X):
         n_sample = X.shape[0]
-        X = X.reshape(n_sample, 3, 256, 256)
-        res = torch.zeros(1,3,256,256)
-        for i in range(n_sample):
-            x = np.moveaxis(X[i], 0, -1)
-            img = Image.fromarray((x*255).astype('uint8'))
-            t = self.data_transforms(img).unsqueeze(0)
-            res = torch.cat((res,t))
-        return res[1:]
+        X = X.reshape(n_sample, 3, 128, 128)
+        X = X.astype(np.float) / 255.
+        return torch.Tensor(X)
 
     def process_label(self, y):
         self.label_dico = {}
