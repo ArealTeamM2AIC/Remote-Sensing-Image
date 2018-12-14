@@ -28,6 +28,7 @@ import shutil
 from scipy.sparse import * # used in data_binary_sparse
 from zipfile import ZipFile, ZIP_DEFLATED
 from contextlib import closing
+# import ingestion_program.data_converter as data_converter
 import data_converter
 from sys import stderr
 from sys import version

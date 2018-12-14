@@ -90,7 +90,6 @@ class DataManager:
 		if filter_features: # add hoc feature selection, for the example...
 			fn = min(Xtr.shape[1], 1000)
 			idx = data_converter.tp_filter(Xtr, Ytr, feat_num=fn, verbose=verbose)
-			print(Xtr.shape)
 			Xtr = Xtr[:,idx]
 			Xva = Xva[:,idx]
 			Xte = Xte[:,idx]

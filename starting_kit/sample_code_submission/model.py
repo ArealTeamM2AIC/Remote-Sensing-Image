@@ -59,7 +59,7 @@ class BasicCNN(BaseEstimator):
         self.criterion = nn.CrossEntropyLoss()
 
         # Optimizer
-        self.optim = optim.Adagrad(self.model_conv.parameters(), lr=1e-3, weight_decay=0.2)
+        self.optim = optim.Adagrad(self.model_conv.parameters(), lr=1e-3)#, weight_decay=0.2)
 
         # Image transformation
         mean = [0.5, 0.5, 0.5]

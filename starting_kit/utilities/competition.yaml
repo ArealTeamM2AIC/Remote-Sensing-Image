@@ -35,10 +35,10 @@ phases:
     force_best_submission_to_leaderboard: True      # Participants will see their best submission on the leaderboard
     starting_kit: starting_kit.zip                  # The starting kit you prepared
     ingestion_program: ingestion_program.zip        # The ingestion program (the same for both phases)
-    public_data: input_data.zip                     # Same as input data (available for download by the participants)
-    input_data: input_data.zip                      # The data used by the ingestion program (and the code of the participants) in both phases
+    public_data: 0cfa6354-20e6-4953-b708-b5ecd70c296e                     # Same as input data (available for download by the participants)
+    input_data: 0cfa6354-20e6-4953-b708-b5ecd70c296e                      # The data used by the ingestion program (and the code of the participants) in both phases
     scoring_program: scoring_program.zip            # The scoring program (the same for both phases)
-    reference_data: reference_data_1.zip            # The truth values (solution) for phase 1 used by the scoring program
+    reference_data: aafc416f-b298-4ad9-9c38-5e56914f4989            # The truth values (solution) for phase 1 used by the scoring program
     color: green   
   2:
     phasenumber: 2
@@ -51,7 +51,7 @@ phases:
     auto_migration: True    
     ingestion_program: ingestion_program.zip        # The ingestion program (the same for both phases)
     input_data: input_data.zip                      # The data used by the ingestion program (and the code of the participants) in both phases
-    reference_data: reference_data_2.zip            # The truth values (solution) for phase 1 used by the scoring program
+    reference_data: 3cd5f82c-6812-4a5b-b07c-be73bced4a05            # The truth values (solution) for phase 1 used by the scoring program
     color: purple
 
 leaderboard:
