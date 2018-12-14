@@ -28,7 +28,7 @@ class SimpleConvModel(nn.Module):
         self.seq2 = nn.Sequential(nn.Linear(16 * 8 * 8, self.out_class),#self.linear_hidden_size),
                                   #nn.ReLU(),
                                   #nn.Linear(self.linear_hidden_size, self.out_class),
-                                  nn.Softmax(dim = 1)) 
+                                  nn.Softmax(dim = 1))
 
     def forward(self, x):
         out1 = self.seq1(x)
@@ -37,7 +37,7 @@ class SimpleConvModel(nn.Module):
         return out3
 
 class BasicCNN(BaseEstimator):
-    def __init__(self, learning_rate=1e-3, nb_epoch = 10, batch_size = 32, verbose=False):
+    def __init__(self, learning_rate=1e-3, nb_epoch = 10, batch_size = 32, verbose=False, use_cuda=False):
         super(BasicCNN, self).__init__()
 
         if learning_rate is None:
@@ -48,92 +48,86 @@ class BasicCNN(BaseEstimator):
             batch_size = 32
         if verbose is None:
             verbose = False
+        if use_cuda is None:
+            use_cuda = False
 
         self.nb_epoch = nb_epoch
         self.batch_size = batch_size
         self.verbose = verbose
+        self.use_cuda = use_cuda
 
         self.model_conv = SimpleConvModel()
 
         # Loss function
         self.criterion = nn.CrossEntropyLoss()
 
+        if self.use_cuda:
+            self.model_conv.cuda()
+            self.criterion.cuda()
+
         # Optimizer
         self.optim = optim.Adagrad(self.model_conv.parameters(), lr=1e-3, weight_decay=0.05)
 
-        # Image transformation
-        mean = [0.5, 0.5, 0.5]
-        std = [0.5, 0.5, 0.5]
-
-
-        self.data_transforms = transforms.Compose([
-        transforms.ToTensor(),
-        transforms.Normalize(mean, std)])
-
-    def fit(self, X, y):
+    def fit(self, X, Y):
         '''
             param X: numpy.ndarray
-                shape = (1, C * W * H)
-                with C = 3, W = H = 256
+                shape = (num_sample, C * W * H)
+                with C = 3, W = H = 128
             param Y: numpy.ndarray
                 shape = (num_sample, 1)
         '''
         X = self.process_data(X)
-        # n_sample = X.size(0)
-        # nb_batch = int(n_sample / self.batch_size)
 
-        y = self.process_label(y)
+        Y = self.process_label(Y)
 
         self.model_conv.train()
+
+        nb_batch = int(X.shape[0] / self.batch_size)
+
         for e in range(self.nb_epoch):
             sum_loss = 0
-            out = self.model_conv(X)
-            loss = self.criterion(out, y)
+            for i in range(nb_batch):
+                self.optim.zero_grad()
+                beg = i * self.batch_size
+                end = min(X.shape[0], (i + 1) * self.batch_size)
 
-            loss.backward()
-            self.optim.step()
+                x = X[beg:end]
+                y = Y[beg:end]
+                if self.use_cuda:
+                    x, y = x.cuda(), y.cuda()
+                out = self.model_conv(x)
+                loss = self.criterion(out, y)
 
-            sum_loss += loss.item()
+                loss.backward()
+                self.optim.step()
+
+                sum_loss += loss.item()
+            sum_loss /= nb_batch
             if self.verbose:
                 print("Epoch %d : loss = %f" % (e, sum_loss))
 
     def process_data(self, X):
-        # n_sample = X.shape[0]
-        # X = X.reshape(n_sample, 3, 128, 128)
-        # res = torch.zeros(1,3,128,128)
-        # for i in range(n_sample):
-        #     x = np.moveaxis(X[i], 0, -1)
-        #     if i % 1000 == 0:
-        #         print(x)
-        #     img = Image.fromarray((x).astype('uint8'))
-        #     t = self.data_transforms(img).unsqueeze(0)
-        #     res = torch.cat((res,t))
-        # return res[1:]
         n_sample = X.shape[0]
-        # X = normalize(X)
         mean = np.mean(X, axis=1)[:, np.newaxis]
         std = np.std(X, axis=1)[:, np.newaxis]
         X = (X - mean) / std
         X = X.reshape(n_sample, 3, 128, 128)
         X = X.astype(np.float)# / 255.
+        #print(X[0])
         return torch.Tensor(X)
 
     def process_label(self, y):
-        self.label_dico = {}
         res = torch.zeros(1)
         for i in range(y.shape[0]):
-            l = y[i,0]
-            if l not in self.label_dico:
-                self.label_dico[l] = len(self.label_dico)
-            l = torch.Tensor([self.label_dico[l]])
+            l = torch.Tensor([y[i,0]])
             res = torch.cat((res, l))
-        return res[1:].type(torch.long) 
+        return res[1:].type(torch.long)
 
     def predict(self, X):
         '''
             param X: numpy.ndarray
                 shape = (num_sample, C * W * H)
-                with C = 3, W = H = 256
+                with C = 3, W = H = 128
             return: numpy.ndarray
                 of int with shape (num_sample) ?
                 of float with shape (num_sample, num_class) ?
@@ -143,7 +137,9 @@ class BasicCNN(BaseEstimator):
         self.model_conv.eval()
         X = self.process_data(X)
 
-        pred = self.model_conv(X).argmax(dim=1)
+        if self.use_cuda:
+            X = X.cuda()
+        pred = self.model_conv(X).argmax(dim=1).cpu().numpy()
         return pred
 
     def save(self, path="./"):
