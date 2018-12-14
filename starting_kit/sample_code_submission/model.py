@@ -1,11 +1,11 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
-import torchvision
 import numpy as np
 import pickle
 from torchvision import transforms
 from sklearn.base import BaseEstimator
+from sklearn.preprocessing import normalize
 from PIL import Image
 from os.path import isfile
 
@@ -59,13 +59,11 @@ class BasicCNN(BaseEstimator):
         self.criterion = nn.CrossEntropyLoss()
 
         # Optimizer
-        self.optim = optim.Adagrad(self.model_conv.parameters(), lr=1e-3)#, weight_decay=0.2)
+        self.optim = optim.Adagrad(self.model_conv.parameters(), lr=1e-3, weight_decay=0.05)
 
         # Image transformation
         mean = [0.5, 0.5, 0.5]
         std = [0.5, 0.5, 0.5]
-        scale = 360
-        use_parallel = True
 
 
         self.data_transforms = transforms.Compose([
@@ -75,14 +73,14 @@ class BasicCNN(BaseEstimator):
     def fit(self, X, y):
         '''
             param X: numpy.ndarray
-                shape = (num_sample, C * W * H)
+                shape = (1, C * W * H)
                 with C = 3, W = H = 256
             param Y: numpy.ndarray
                 shape = (num_sample, 1)
         '''
         X = self.process_data(X)
-        n_sample = X.size(0)
-        nb_batch = int(n_sample / self.batch_size)
+        # n_sample = X.size(0)
+        # nb_batch = int(n_sample / self.batch_size)
 
         y = self.process_label(y)
 
@@ -100,9 +98,24 @@ class BasicCNN(BaseEstimator):
                 print("Epoch %d : loss = %f" % (e, sum_loss))
 
     def process_data(self, X):
+        # n_sample = X.shape[0]
+        # X = X.reshape(n_sample, 3, 128, 128)
+        # res = torch.zeros(1,3,128,128)
+        # for i in range(n_sample):
+        #     x = np.moveaxis(X[i], 0, -1)
+        #     if i % 1000 == 0:
+        #         print(x)
+        #     img = Image.fromarray((x).astype('uint8'))
+        #     t = self.data_transforms(img).unsqueeze(0)
+        #     res = torch.cat((res,t))
+        # return res[1:]
         n_sample = X.shape[0]
+        # X = normalize(X)
+        mean = np.mean(X, axis=1)[:, np.newaxis]
+        std = np.std(X, axis=1)[:, np.newaxis]
+        X = (X - mean) / std
         X = X.reshape(n_sample, 3, 128, 128)
-        X = X.astype(np.float) / 255.
+        X = X.astype(np.float)# / 255.
         return torch.Tensor(X)
 
     def process_label(self, y):
