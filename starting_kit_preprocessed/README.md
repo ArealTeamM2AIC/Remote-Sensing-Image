@@ -1,5 +1,6 @@
 This is a starting kit for the Remote Sensing Image Scene Classification. 
-We use the NWPU-RESISC45 satelite dataset from [link](https://project.inria.fr/aerialimagelabeling/). The data set contains 31500 of satelite images of 45 class, each having 700 images.
+We use the NWPU-RESISC45 satelite dataset from [link](https://project.inria.fr/aerialimagelabeling/). The data set contains 9100 of satelite images of 13 class, each having 700 images.
+The data was preproccessed with a deep CNN (AlexNet) to make the learning task easier for less advanced machine learning algorithms.
 
 References and credits: 
 
@@ -31,8 +32,3 @@ then zip the contents of sample_result_submission (without the directory).
 - you modify README.ipynb to provide a good introduction to the problem and good data visualization
 
 - sample_data is a small data subset carved out the challenge TRAINING data, for practice purposes only (do not compromise real validation or test data)
-
-### Info
-For data submission with non-processed data, un-comment the line 140 of `ingestion.py` and comment the line 141. Do the inverse for pre-processed data.
-
-Make sur that the pickled model is the right one (between `AlexNetModel` and `BaselineModel`)
