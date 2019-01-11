@@ -16,7 +16,7 @@ Usage:
 At the prompt type:
 jupyter-notebook README.ipynb
 
-- modify sample_code_submission to provide a better model
+- modify sample_code_submission to provide a better model or you can also write your own model in the jupyter notebook.
 
 - zip the contents of sample_code_submission (without the directory, but with metadata), or
 
