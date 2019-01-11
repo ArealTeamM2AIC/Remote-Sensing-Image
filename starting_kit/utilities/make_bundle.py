@@ -40,7 +40,7 @@ class Bundle:
 	def __init__(self, starting_kit_dir, big_data_dir):
 		''' Defines a bundle structure.'''
 		# Starting kit template
-		self.starting_kit_files = ['README.md', 'README.ipynb', 'scoring_program', 'ingestion_program', 'sample_code_submission', 'sample_data', 'logo.jpg']
+		self.starting_kit_files = ['README.md', 'README.ipynb', 'scoring_program', 'ingestion_program', 'sample_code_submission', 'sample_data', 'logo.jpg', 'requirements.txt']
 		self.starting_kit_dir = starting_kit_dir
 		# Data and code
 		self.big_data = big_data_dir
@@ -358,7 +358,7 @@ if __name__== "__main__":
 
 	# Purge a whole bunch of files before we start (choose which ones):
 	##############################################
-	clean_old_bundles = 1			# Remove old bundles 
+	clean_old_bundles = 0			# Remove old bundles 
 	clean_pyc = 1					# Remove old pyc
 	clean_pycache = 1				# Clear pycache
 	clean_readme = 1				# Remove old README.html
