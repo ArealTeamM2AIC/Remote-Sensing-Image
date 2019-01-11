@@ -16,6 +16,8 @@ In this repository are two different starting kits, corresponding to :
     
 For the starting kit on images, you will need to install pytorch and torchvision, which are provided with requirements.txt files.
 
+You also have a requirements.txt file for starting_kit_preprocessed, although it will probably not be useful.
+
 You just have to :
 
     pip install -r requirements.txt
