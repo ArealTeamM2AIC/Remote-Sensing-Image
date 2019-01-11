@@ -31,8 +31,3 @@ then zip the contents of sample_result_submission (without the directory).
 - you modify README.ipynb to provide a good introduction to the problem and good data visualization
 
 - sample_data is a small data subset carved out the challenge TRAINING data, for practice purposes only (do not compromise real validation or test data)
-
-### Info
-For data submission with non-processed data, un-comment the line 140 of `ingestion.py` and comment the line 141. Do the inverse for pre-processed data.
-
-Make sur that the pickled model is the right one (between `AlexNetModel` and `BaselineModel`)
