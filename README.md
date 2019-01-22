@@ -2,7 +2,7 @@
 
 Multi class classification for image recognition
 
-We used a data set originally presented in a paper in the proceedings of the IEEE conference.
+We used a dataset originally presented in a paper in the proceedings of the IEEE conference, the NSWPCU-45 dataset.
 
 We kept only part of it, the 13 classes that can be assimilated to landscape/nature and not human construction.
 
