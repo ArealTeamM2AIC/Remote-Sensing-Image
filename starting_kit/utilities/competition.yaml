@@ -52,6 +52,7 @@ phases:
     ingestion_program: ingestion_program.zip        # The ingestion program (the same for both phases)
     input_data: input_data.zip                      # The data used by the ingestion program (and the code of the participants) in both phases
     reference_data: 3cd5f82c-6812-4a5b-b07c-be73bced4a05            # The truth values (solution) for phase 1 used by the scoring program
+    scoring_program: scoring_program.zip            # The scoring program (the same for both phases)
     color: purple
 
 leaderboard:

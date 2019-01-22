@@ -9,12 +9,13 @@ def requires_grad(p):
 
 
 class SimpleDecisionTree(BaseEstimator):
-    def __init__(self):
+    def __init__(self, max_depth=5):
         """
         Using DecisionTreeClassifier from sklearn as Baseline Model
+        Has one parameter which is the max depth of the tree (base value of 5)
         """
         super(SimpleDecisionTree, self).__init__()
-        self.classifier = DecisionTreeClassifier()
+        self.classifier = DecisionTreeClassifier(max_depth=max_depth)
         self.num_train_samples=0
         self.num_feat=1
         self.num_labels=1
@@ -34,7 +35,8 @@ class SimpleDecisionTree(BaseEstimator):
 
     def predict(self, X):
         num_test_samples = X.shape[0]
-        if X.ndim>1: num_feat = X.shape[1]
+        if X.ndim>1:
+            num_feat = X.shape[1]
         print("PREDICT: dim(X)= [{:d}, {:d}]".format(num_test_samples, num_feat))
         if (self.num_feat != num_feat):
             print("ARRGH: number of features in X does not match training data!")

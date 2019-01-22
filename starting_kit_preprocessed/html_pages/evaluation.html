@@ -2,12 +2,12 @@
 <h1>Evaluation</h1>
 
 <p>
-The problem is a multicalss classification problem. Each sample (an image) is characterized by its 128*128 pixels. You must predict the categories of 13 classes.
+The problem is a multicalss classification problem. Each sample (an image) is characterized by its 4096 features. You must predict the categories of 13 classes.
 
 <br>
-You are given for training a data matrix X_train of dimension 5200 samples x 49152 (128 * 128 * 3) features
-and an array y_train of labels of dimension 5200 samples. You must train a model
-which predicts the labels for two test matrices X_valid and X_test, each having 1950 samples. 
+You are given for training a data matrix X_train of dimension 1950 samples x 4096 features
+and an array y_train of labels of dimension 1950 samples. You must train a model
+which predicts the labels for two test matrices X_valid and X_test, having respectively 1950 and 5200 samples. 
 
 <br>
 There are 2 phases:
