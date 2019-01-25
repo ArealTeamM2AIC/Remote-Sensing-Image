@@ -8,13 +8,13 @@ def requires_grad(p):
     return p.requires_grad
 
 
-class SimpleDecisionTree(BaseEstimator):
-    def __init__(self, max_depth=5):
+class baselineModel(BaseEstimator):
+    def __init__(self, max_depth=None):
         """
         Using DecisionTreeClassifier from sklearn as Baseline Model
         Has one parameter which is the max depth of the tree (base value of 5)
         """
-        super(SimpleDecisionTree, self).__init__()
+        super(baselineModel, self).__init__()
         self.classifier = DecisionTreeClassifier(max_depth=max_depth)
         self.num_train_samples=0
         self.num_feat=1

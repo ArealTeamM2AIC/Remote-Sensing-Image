@@ -1,31 +1,12 @@
-
 <h1>Evaluation</h1>
-
-<p>
-The problem is a multicalss classification problem. Each sample (an image) is characterized by its 128*128 pixels. You must predict the categories of 13 classes.
-
-<br>
-You are given for training a data matrix X_train of dimension 5200 samples x 49152 (128 * 128 * 3) features
-and an array y_train of labels of dimension 5200 samples. You must train a model
-which predicts the labels for two test matrices X_valid and X_test, each having 1950 samples. 
-
-<br>
-There are 2 phases:
+<p>The problem is a multicalss classification problem. Each sample (an image) is characterized by its 128*128 RGB pixels. You must predict the categories of 13 classes. <br /> You are given for training a data matrix X_train of dimension 5200 samples x 49152 (128 * 128 * 3) features and an array y_train of labels of dimension 5200 samples. You must train a model which predicts the labels for two test matrices X_valid and X_test, each having 1950 samples. <br /> There are 2 phases:</p>
 <ul>
-<li> <b>Phase 1: development phase. </b> We provide you with labeled training data and unlabeled validation and test data.
-Make predictions for both datasets. However, you will receive feed-back on your performance on the validation set only. 
-The performance of your LAST submission will be displayed on the leaderboard.
-<li> <b>Phase 2: final phase.</b> You do not need to do anything. Your last submission of phase 1 will be automatically forwarded.
-Your performance on the test set will appear on the leaderboard when the organizers finish checking the submissions. 
+    <li><strong>Phase 1: development phase. </strong> We provide you with labeled training data and unlabeled validation and test data. Make predictions for both datasets. However, you will receive feed-back on your performance on the validation set only. The performance of your LAST submission will be displayed on the leaderboard.</li>
+    <li><strong>Phase 2: final phase.</strong> You do not need to do anything. Your last submission of phase 1 will be automatically forwarded. Your performance on the test set will appear on the leaderboard when the organizers finish checking the submissions.</li>
 </ul>
-
-This sample competition allows you to submit either:
+<p>This sample competition allows you to submit either:</p>
 <ul>
-<li> Only prediction results (no code).
-<li> A pre-trained prediction model. 
-<li> A prediction model that must be trained and tested. 
+    <li>Only prediction results (no code).</li>
+    <li>A prediction model that must be trained and tested (probably won't work for now because of limitations on codalab's end).</li>
 </ul>
-
-The submissions are evaluated using the <b>accuracy</b> metric.
-</p>
-
+<p>The submissions are evaluated using the <strong>A</strong><strong>ccuracy</strong> metric. This metric determines de classification quality and it is computed by dividing the <strong>number of true positive</strong> (data correctly classified) by&nbsp;<strong><span class="tlid-translation translation"><span title="">total number of</span></span><span class="tlid-translation translation"><span title=""> data</span></span></strong><span class="tlid-translation translation"><span title="">. This kind of metric is at the same time simple and informative on the performance for this classification task g<span class="tlid-translation translation"><span title="">iven that the class distribution within this project is balanced.</span></span></span></span></p>

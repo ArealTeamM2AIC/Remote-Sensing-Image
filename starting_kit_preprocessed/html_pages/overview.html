@@ -1,17 +1,9 @@
 <h1>Solve an Aerial image recognition problem</h1>
-<p>The raw data set contains 9100 color images of size 128 <b>x</b> 128, images of 13 class, each having 700 images. This challenge was created with preprocessed images, being vectors of 4096 features, mostly composed of 0, though we kept the full data and not a sparse representation. This kind of data no longer looks like images.
-    <br> The classes are all kinds of landscapes or natural contructions, and more specifically : <br> beach, chaparral, cloud, desert, forest, island, lake, meadow, mountain, river, sea_ice, snowberg, wetland. 
-</p>
-<p>
-    <b>
-        The goal of the challenge will be to classify each example and assign it to its correct class.
-    </b>
-</p>
-
-<p><b>References and credits:</b>
-    <br>Gong Cheng, Junwei Han, and Xiaoqiang Lu, RemoteSensing Image Scene Classification: Benchmark andState of the Art. IEEE International.
-    <br>The competition protocol was designed by Isabelle Guyon.
-    <br>The starting kit was adapted from an Jupyper notebook designed by Balazs Kegl for the <a href="http://www.ramp.studio/">RAMP platform</a>.
-    <br>This challenge was generated using Chalab, a competition wizard designed by Laurent Senta.
-    <br> This challenge was created by the Areal team, composed of David Biard, Samuel Berrien, Théo Cornille, Robin Duraz, Hao Liu and Trung Vu-Thanh. You can contact the team at areal@chalearn.org.
-    <br> The original data is a large-scale dataset, termed "NWPU-RESISC45", which is a publicly available benchmark for REmote Sensing Image Scene Classification (RESISC), created by Northwestern Polytechnical University (NWPU). This  dataset contains 31,500 images, covering 45 scene classes with 700 images (256 x 256 pixels) per class.
+<p>The raw data set contains 9100 color images of size 128 <strong>x</strong> 128, images of 13 class, each having 700 images. This challenge was created with preprocessed images, being vectors of 1024 features. This kind of data no longer looks like images, and we have no idea what those features can represent. <br /> The classes are some kind of landscape or a natural environment, and more specifically : <br /> beach, chaparral, cloud, desert, forest, island, lake, meadow, mountain, river, sea_ice, snowberg, wetland.</p>
+<p><strong> The goal of the challenge will be to classify each example and assign it to its correct class. </strong></p>
+<p><span class="tlid-translation translation"><span title="">This challenge is relatively easier than the one on the raw data.</span> <span title="">Indeed, it is possible to obtain good performance thanks to a wide choice of learning algorithm, whether with deep learning or a simpler algorithms.</span></span></p>
+<p><span class="tlid-translation translation"><span title="">Below are some sample feature vectors visualized as images (matrices):</span></span></p>
+<p><span class="tlid-translation translation"><span title=""><img src="https://raw.githubusercontent.com/ArealTeamM2AIC/Remote-Sensing-Image/dev_final/starting_kit_preprocessed/prepr_images.png" alt="" width="720" height="720" /></span></span></p>
+<p>The challenge video presentation is below :</p>
+<p><iframe src="https://www.youtube.com/embed/lJrmpH8aGts" frameborder="0" width="560" height="315"></iframe></p>
+<p><strong>References and credits:</strong> <br />Gong Cheng, Junwei Han, and Xiaoqiang Lu, RemoteSensing Image Scene Classification: Benchmark andState of the Art. IEEE International. <br />The competition protocol was designed by Isabelle Guyon. <br />The starting kit was adapted from an Jupyper notebook designed by Balazs Kegl for the <a href="http://www.ramp.studio/">RAMP platform</a>. <br />This challenge was generated using Chalab, a competition wizard designed by Laurent Senta. <br /> This challenge was created by the Areal team, composed of David Biard, Samuel Berrien, Th&eacute;o Cornille, Robin Duraz, Hao Liu and Trung Vu-Thanh. You can contact the team at areal@chalearn.org. <br /> The original data is a large-scale dataset, termed "NWPU-RESISC45", which is a publicly available benchmark for Remote Sensing Image Scene Classification (RESISC), created by Northwestern Polytechnical University (NWPU). This dataset contains 31,500 images, covering 45 scene classes with 700 images (256 x 256 pixels) per class.</p>

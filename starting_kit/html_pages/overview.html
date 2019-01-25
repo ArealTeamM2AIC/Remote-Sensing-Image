@@ -1,18 +1,16 @@
 <h1>Solve an Aerial image recognition problem</h1>
-<p>The data set contains 9100 color images of size 128 <b>x</b> 128, images of 13 class, each having 700 images.
-    <br> The classes are all a kind of landscapes or natural contructions, and more specifically : <br> beach, chaparral, cloud, desert, forest, island, lake, meadow, mountain, river, sea_ice, snowberg, wetland. 
-</p>
-
-<p>
-    <b>
-        The goal of this challenge will be to classify each image and assign to it the correct label.
-    </b>
-</p>
-
-<p><b>References and credits:</b>
-    <br>Gong Cheng, Junwei Han, and Xiaoqiang Lu, RemoteSensing Image Scene Classification: Benchmark andState of the Art. IEEE International.
-    <br>The competition protocol was designed by Isabelle Guyon.
-    <br>The starting kit was adapted from an Jupyper notebook designed by Balazs Kegl for the <a href="http://www.ramp.studio/">RAMP platform</a>.
-    <br>This challenge was generated using Chalab, a competition wizard designed by Laurent Senta.
-    <br> This challenge was created by the Areal team, composed of David Biard, Samuel Berrien, Théo Cornille, Robin Duraz, Hao Liu and Trung Vu-Thanh. You can contact them at areal@chalearn.org
-    <br> The original data is a large-scale dataset, termed "NWPU-RESISC45", which is a publicly available benchmark for REmote Sensing Image Scene Classification (RESISC), created by Northwestern Polytechnical University (NWPU). This  dataset contains 31,500 images, covering 45 scene classes with 700 images (256 x 256 pixels) per class.
+<p>The data set contains 9100 color images of size 128 <strong>x</strong> 128, images of 13 class, each having 700 images. <br />The classes are some kind of landscape or a natural environment, and more specifically :<br /> beach, chaparral, cloud, desert, forest, island, lake, meadow, mountain, river, sea_ice, snowberg, wetland.</p>
+<p><strong> The goal of this challenge will be to classify each image and assign to it the correct label. </strong></p>
+<p><span class="tlid-translation translation"><span title="">It is good to know a little in advance how to handle this challenge which is slightly more complicated than the one with the preprocessed data.<br />So to guide you a little bit, with our experience on this chalenge, a rather effective way to solve this classification task could be to use Deep Learning, more precisely, convolutional networks (CNNs).<br /></span></span></p>
+<p><strong>Below some sample images :</strong></p>
+<p><img src="https://raw.githubusercontent.com/ArealTeamM2AIC/Remote-Sensing-Image/dev_final/starting_kit/sample_images/sample_images.png" alt="" width="601" height="518" /></p>
+<p><strong>Presentation video :</strong></p>
+<p><iframe src="https://www.youtube.com/embed/lJrmpH8aGts" frameborder="0" width="560" height="315"></iframe></p>
+<p><strong>If you want to use the competition's docker, you can use the commands below :</strong></p>
+<p><code>sudo docker run --name areal -it -v path/to/data:/home/aux -p 5000:8888 areal/codalab:pytorchv2</code></p>
+<p>In the docker, run : <code>jupyter-notebook --ip 0.0.0.0 --allow-root</code></p>
+<p>After that, you have to copy-paste the line containing the link at the end and follow the instructions to entrer the address in your own browser outside the docker (don't forget to change 8888 to 5000 in the adress after the :), for example <code>http://0.0.0.0:5000/?token=968e48d718ab5676d8c23c4a0d7bf3b088151d38fd3e1d86</code>.</p>
+<p>The notebook will be opened and you just have to navigate to find the README.ipynb (home -&gt; aux -&gt; starting_kit).</p>
+<p>Once open, check that the kernel is a Python3 kernel. If it is, you're good to go. Else just change it to a Python3 kernel.</p>
+<p>If you want to quit the docker, you can just type <code>exit</code> in the terminal, and type <code>docker start areal</code> to restart it.</p>
+<p><strong>References and credits:</strong> <br />Gong Cheng, Junwei Han, and Xiaoqiang Lu, RemoteSensing Image Scene Classification: Benchmark andState of the Art. IEEE International. <br />The competition protocol was designed by Isabelle Guyon. <br />The starting kit was adapted from an Jupyper notebook designed by Balazs Kegl for the <a href="http://www.ramp.studio/">RAMP platform</a>. <br />This challenge was generated using Chalab, a competition wizard designed by Laurent Senta. <br /> This challenge was created by the Areal team, composed of David Biard, Samuel Berrien, Th&eacute;o Cornille, Robin Duraz, Hao Liu and Trung Vu-Thanh. You can contact them at areal@chalearn.org <br /> The original data is a large-scale dataset, termed "NWPU-RESISC45", which is a publicly available benchmark for Remote Sensing Image Scene Classification (RESISC), created by Northwestern Polytechnical University (NWPU). This dataset contains 31,500 images, covering 45 scene classes with 700 images (256 x 256 pixels) per class.</p>
